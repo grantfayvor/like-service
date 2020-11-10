@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://kit.fontawesome.com/bf43cc60fb.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+
+<body>
+    <button class="like__button" onclick="like()">
+      <span id="thumbs-up" class="far fa-4x fa-thumbs-up"></span>
+    </button>
+    <span id="badge" class="badge"><%= page.noOfLikes || 0 %></span>
+
+    <script>
+      const like = async () => {
+        const page = await fetch(`/api/page/<%= page.id %>`, {
+          method: "PUT"
+        })
+        .then(resp => resp.json());
+
+        document.getElementById("badge").innerHTML = page.noOfLikes;
+        document.getElementById("thumbs-up").style.color = "#ea27bd";
+      };
+    </script>
+</body>
+
+</html>

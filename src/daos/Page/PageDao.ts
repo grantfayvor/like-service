@@ -1,4 +1,4 @@
-import { IPage } from "@entities/Page";
+import Page from "@entities/Page";
 import IDatabase from "@daos/Database";
 
 class PageDao {
@@ -9,19 +9,20 @@ class PageDao {
     this.db = db;
   }
 
-  public add(page: IPage): IPage {
+  public add(page: Page): Page {
     this.db.pages.push(page);
     return page;
   }
 
-  public updatePageLikes(pageId: string): IPage|undefined {
+  public update(pageId: string): Page|undefined {
     const page = this.getPageById(pageId);
     if (!page) return;
 
     page.noOfLikes += 1;
+    return page;
   }
 
-  public getPageById(pageId: string): IPage|undefined {
+  public getPageById(pageId: string): Page|undefined {
     return this.db.pages.find(page => page.id === pageId);
   }
 }

@@ -10,6 +10,7 @@ import 'express-async-errors';
 
 import BaseRouter from './routes';
 import logger from '@shared/Logger';
+import PageDao from '@daos/Page/PageDao';
 
 const app = express();
 const { BAD_REQUEST } = StatusCodes;
@@ -21,7 +22,7 @@ const { BAD_REQUEST } = StatusCodes;
  ***********************************************************************************/
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Show routes called in console during development
@@ -36,8 +37,12 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(cors());
 
+const db = {
+    pages: []
+};
+
 // Add APIs
-app.use('/api', BaseRouter);
+app.use('/api', BaseRouter(db));
 
 // Print API errors
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -58,8 +63,20 @@ const viewsDir = path.join(__dirname, 'views');
 app.set('views', viewsDir);
 const staticDir = path.join(__dirname, 'public');
 app.use(express.static(staticDir));
+app.set('view engine', 'ejs');
+
+
+app.get("/like", (req: Request, res: Response) => {
+    if (!req.query.pageId) {
+        throw new Error("Page id is required");
+    }
+
+    const pageDao = new PageDao(db);
+    res.render('like_button', { page: pageDao.getPageById(req.query.pageId as string) || {} });
+});
+
 app.get('*', (req: Request, res: Response) => {
-    res.sendFile('index.html', {root: viewsDir});
+    res.sendFile('index.html', { root: viewsDir });
 });
 
 // Export express instance

@@ -21,6 +21,10 @@ const pageRoutes = (db: IDatabase) => {
     return res.status(StatusCodes.CREATED).json(pageDao.add(new Page(page)));
   });
 
+  router.put('/:pageId', (req: IRequest, res: Response) => {
+    return res.status(StatusCodes.OK).json(pageDao.update(req.params.pageId));
+  })
+
   return router;
 }
 

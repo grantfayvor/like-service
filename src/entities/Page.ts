@@ -1,7 +1,7 @@
 export interface IPage {
-  id: string;
+  id?: string;
   name: string;
-  noOfLikes: number;
+  noOfLikes?: number;
 }
 
 class Page {
