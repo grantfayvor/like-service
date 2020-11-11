@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import path from 'path';
 import helmet from 'helmet';
 import cors from 'cors';
+import rateLimit from "express-rate-limit";
 
 import express, { NextFunction, Request, Response } from 'express';
 import StatusCodes from 'http-status-codes';
@@ -36,6 +37,12 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(cors());
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+app.use(rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 20,
+    message: "Max attempts reached. Please wait a while before trying again"
+}));
 
 const db = {
     pages: {
