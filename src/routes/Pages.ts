@@ -18,15 +18,15 @@ const pageRoutes = (db: IDatabase) => {
         error: paramMissingError,
       });
     }
-    return res.status(StatusCodes.CREATED).json(pageDao.add(new Page(page)));
+    return res.status(StatusCodes.CREATED).json({ page: pageDao.add(new Page(page)) });
   });
 
   router.get('/:pageId', (req: IRequest, res: Response) => {
-    return res.status(StatusCodes.OK).json(pageDao.getPageById(req.params.pageId));
+    return res.status(StatusCodes.OK).json({ page: pageDao.getPageById(req.params.pageId) });
   });
 
   router.put('/:pageId', (req: IRequest, res: Response) => {
-    return res.status(StatusCodes.OK).json(pageDao.update(req.params.pageId));
+    return res.status(StatusCodes.OK).json({ page: pageDao.update(req.params.pageId) });
   })
 
   return router;

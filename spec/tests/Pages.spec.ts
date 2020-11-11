@@ -41,8 +41,8 @@ describe('Pages Routes', () => {
         callApi({ page })
           .end((err: Error, res: IResponse) => {
             expect(res.status).toBe(StatusCodes.CREATED);
-            expect(res.body).toEqual(page);
-            expect((res.body as Err).error).toBeUndefined();
+            expect(res.body.page).toEqual(page);
+            expect(res.body.error).toBeUndefined();
             done();
           });
       });
@@ -53,7 +53,7 @@ describe('Pages Routes', () => {
       callApi({})
         .end((err: Error, res: IResponse) => {
           expect(res.status).toBe(StatusCodes.BAD_REQUEST);
-          expect((res.body as Err).error).toBe(paramMissingError);
+          expect(res.body.error).toBe(paramMissingError);
           done();
         });
     });
@@ -75,8 +75,8 @@ describe('Pages Routes', () => {
         agent.put(paths.LIKE_PAGE.replace(":pageId", page.id))
           .end((err: Error, res: IResponse) => {
             expect(res.status).toBe(StatusCodes.OK);
-            expect((res.body as Page).noOfLikes).toEqual(page.noOfLikes + 1);
-            expect((res.body as Err).error).toBeUndefined();
+            expect(res.body.page?.noOfLikes).toEqual(page.noOfLikes + 1);
+            expect(res.body.error).toBeUndefined();
             done();
           });
       });
@@ -100,8 +100,8 @@ describe('Pages Routes', () => {
         agent.get(paths.LIKE_PAGE.replace(":pageId", page.id))
           .end((err: Error, res: IResponse) => {
             expect(res.status).toBe(StatusCodes.OK);
-            expect((res.body as Page)).toEqual(page);
-            expect((res.body as Err).error).toBeUndefined();
+            expect(res.body.page).toEqual(page);
+            expect(res.body.error).toBeUndefined();
             done();
           });
       });

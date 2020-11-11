@@ -6,7 +6,10 @@ export interface Err {
 }
 
 export interface IResponse extends Response {
-    body: IPage | Err
+    body: {
+        page?: IPage;
+        error?: string;
+    }
 }
 
 export interface IReqBody {
