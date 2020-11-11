@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: like-service-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: like-service-api
+  template:
+    metadata:
+      labels:
+        app: like-service-api
+    spec:
+      containers:
+        - name: app
+          image: hyperdebugger/like-service-api:latest
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Always
