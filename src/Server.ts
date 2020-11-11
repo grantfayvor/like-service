@@ -4,6 +4,8 @@ import path from 'path';
 import helmet from 'helmet';
 import cors from 'cors';
 import rateLimit from "express-rate-limit";
+import swaggerUI from "swagger-ui-express";
+import swaggerDocument from "../swagger";
 
 import express, { NextFunction, Request, Response } from 'express';
 import StatusCodes from 'http-status-codes';
@@ -44,6 +46,8 @@ app.use(rateLimit({
     max: 20,
     message: "Max attempts reached. Please wait a while before trying again"
 }));
+
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 const db = new Database({
     "1234": {
