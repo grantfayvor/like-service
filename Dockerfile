@@ -1,7 +1,8 @@
 FROM node:14.15.0-buster-slim
 WORKDIR /app
 COPY . /app
-RUN npm install
+RUN npm install && \
+  npm run build
 EXPOSE 3000
 ENV NAME Like_Service
 ENV NODE_ENV production
