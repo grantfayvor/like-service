@@ -1,5 +1,5 @@
 import StatusCodes from 'http-status-codes';
-import { Request, Response, Router } from 'express';
+import { Response, Router } from 'express';
 
 import { paramMissingError, IRequest } from '@shared/constants';
 import IDatabase from '@daos/Database';
@@ -19,6 +19,10 @@ const pageRoutes = (db: IDatabase) => {
       });
     }
     return res.status(StatusCodes.CREATED).json(pageDao.add(new Page(page)));
+  });
+
+  router.get('/:pageId', (req: IRequest, res: Response) => {
+    return res.status(StatusCodes.OK).json(pageDao.getPageById(req.params.pageId));
   });
 
   router.put('/:pageId', (req: IRequest, res: Response) => {

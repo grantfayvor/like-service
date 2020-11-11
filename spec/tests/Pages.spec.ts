@@ -22,7 +22,7 @@ describe('Pages Routes', () => {
     done();
   });
 
-  describe(`"POST:${paths.ADD_PAGE}"`, () => {
+  describe(`POST:${paths.ADD_PAGE}`, () => {
     const callApi = (reqBody: IReqBody) => {
       return agent.post(paths.ADD_PAGE).type('form').send(reqBody);
     };
@@ -59,7 +59,7 @@ describe('Pages Routes', () => {
     });
   });
 
-  describe(`"PUT:${paths.LIKE_PAGE}"`, () => {
+  describe(`PUT:${paths.LIKE_PAGE}`, () => {
     const page = {
       id: "23232323sd",
       name: 'Test Page',
@@ -81,5 +81,29 @@ describe('Pages Routes', () => {
           });
       });
 
+  });
+
+  describe(`GET:${paths.LIKE_PAGE}`, () => {
+    const page = {
+      id: "23232323sd",
+      name: 'Test Page',
+      noOfLikes: 10
+    };
+
+    it(`should return a status code of "${StatusCodes.OK}" with 
+      the page if the request was successful.`,
+      (done) => {
+        // Setup spy
+        spyOn(PageDao.prototype, 'getPageById').and.returnValue(page);
+
+        // Call API
+        agent.get(paths.LIKE_PAGE.replace(":pageId", page.id))
+          .end((err: Error, res: IResponse) => {
+            expect(res.status).toBe(StatusCodes.OK);
+            expect((res.body as Page)).toEqual(page);
+            expect((res.body as Err).error).toBeUndefined();
+            done();
+          });
+      });
   });
 });
