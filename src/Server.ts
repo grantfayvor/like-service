@@ -12,6 +12,7 @@ import 'express-async-errors';
 import BaseRouter from './routes';
 import logger from '@shared/Logger';
 import PageDao from '@daos/Page/PageDao';
+import { Database } from '@daos/Database';
 
 const app = express();
 const { BAD_REQUEST } = StatusCodes;
@@ -44,15 +45,13 @@ app.use(rateLimit({
     message: "Max attempts reached. Please wait a while before trying again"
 }));
 
-const db = {
-    pages: {
-        "1234": {
-            id: "1234",
-            name: "Sample Application",
-            noOfLikes: 0
-        }
+const db = new Database({
+    "1234": {
+        id: "1234",
+        name: "Sample Application",
+        noOfLikes: 0
     }
-};
+});
 
 // Add APIs
 app.use('/api', BaseRouter(db));

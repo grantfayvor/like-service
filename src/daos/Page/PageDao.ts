@@ -1,11 +1,11 @@
 import Page from "@entities/Page";
-import IDatabase from "@daos/Database";
+import { Database } from "@daos/Database";
 
 class PageDao {
 
-  private db: IDatabase;
+  private db: Database;
 
-  constructor(db: IDatabase) {
+  constructor(db: Database) {
     this.db = db;
   }
 
@@ -14,16 +14,22 @@ class PageDao {
     return page;
   }
 
-  public update(pageId: string): Page | undefined {
-    const page = this.getPageById(pageId);
-    if (!page) return;
+  public update(pageId: string): Promise<Page | undefined> {
+    return this.db.withTransaction("pages", next => {
+      const page = this.getPageById(pageId);
+      if (!page) return;
 
-    page.noOfLikes += 1;
-    return page;
+      page.noOfLikes += 1;
+      next(page);
+    })
+      .then(res => res as Page | undefined);
   }
 
   public getPageById(pageId: string): Page | undefined {
-    return this.db.pages[pageId];
+    const page = this.db.pages[pageId];
+    if (!page || typeof page === "boolean") return;
+
+    return page;
   }
 }
 
