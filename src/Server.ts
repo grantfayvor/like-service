@@ -38,7 +38,13 @@ if (process.env.NODE_ENV === 'production') {
 app.use(cors());
 
 const db = {
-    pages: []
+    pages: {
+        "1234": {
+            id: "1234",
+            name: "Sample Application",
+            noOfLikes: 0
+        }
+    }
 };
 
 // Add APIs

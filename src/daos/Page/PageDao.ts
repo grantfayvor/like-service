@@ -10,11 +10,11 @@ class PageDao {
   }
 
   public add(page: Page): Page {
-    this.db.pages.push(page);
+    this.db.pages[page.id] = page;
     return page;
   }
 
-  public update(pageId: string): Page|undefined {
+  public update(pageId: string): Page | undefined {
     const page = this.getPageById(pageId);
     if (!page) return;
 
@@ -22,8 +22,8 @@ class PageDao {
     return page;
   }
 
-  public getPageById(pageId: string): Page|undefined {
-    return this.db.pages.find(page => page.id === pageId);
+  public getPageById(pageId: string): Page | undefined {
+    return this.db.pages[pageId];
   }
 }
 
