@@ -70,7 +70,7 @@ describe('Pages Routes', () => {
       (done) => {
         // Setup spy
         spyOn(PageDao.prototype, 'update')
-          .and.returnValue({ ...page, noOfLikes: page.noOfLikes + 1 });
+          .and.returnValue(Promise.resolve({ ...page, noOfLikes: page.noOfLikes + 1 }));
         // Call API
         agent.put(paths.LIKE_PAGE.replace(":pageId", page.id))
           .end((err: Error, res: IResponse) => {
