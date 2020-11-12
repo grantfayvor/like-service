@@ -27,7 +27,7 @@ You can run the app either as a local server, Docker or with Kubernetes.
 ```kubectl apply -f application-service.yml```
 
 ### ___Things to note___
-* Rate limiting was used to limit the number of requests a user can make per time which was set to 20 requests per 15 minutes. Intention is to prevent potential DDOS attacks.
+* Rate limiting was used to limit the number of requests a user can make per time which was set to 100 requests per 15 minutes. Intention is to prevent potential DDOS attacks.
 * Database level transactions was used to prevent race conditions when likes where happening asynchronously by multiple users at the same time. This is in keeping with the Consistent quality of ACID databases.
 * OpenAPI specs were created with Swagger UI.
 

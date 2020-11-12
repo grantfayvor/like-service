@@ -43,7 +43,7 @@ app.use(cors());
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 app.use(rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 20,
+    max: 100,
     message: "Max attempts reached. Please wait a while before trying again"
 }));
 
