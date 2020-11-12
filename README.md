@@ -30,6 +30,7 @@ You can run the app either as a local server, Docker or with Kubernetes.
 * Rate limiting was used to limit the number of requests a user can make per time which was set to 100 requests per 15 minutes. Intention is to prevent potential DDOS attacks.
 * Database level transactions was used to prevent race conditions when likes where happening asynchronously by multiple users at the same time. This is in keeping with the Consistent quality of ACID databases.
 * OpenAPI specs were created with Swagger UI.
+* If users are to be restricted to just one like per user. Then an identification system can be built around the like service using either emails, username and passwords, or ip addresses, etc.
 
 ### __Bonus Challenge__
 * Rate limiting should be used to prevent DDOS attacks. Request inputs should be properly validated to prevent potential malicious input attacks.
