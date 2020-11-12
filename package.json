@@ -4,7 +4,7 @@
   "scripts": {
     "build": "ts-node build.ts && tsc --build tsconfig.prod.json",
     "lint": "eslint . --ext .ts",
-    "start": "node -r module-alias/register ./dist/index --env=production",
+    "start": "node -r module-alias/register ./dist/src/index --env=production",
     "start:dev": "nodemon",
     "test": "nodemon --config ./spec/nodemon.json"
   },
@@ -19,10 +19,10 @@
     "exec": "ts-node -r tsconfig-paths/register ./src"
   },
   "_moduleAliases": {
-    "@daos": "dist/daos",
-    "@entities": "dist/entities",
-    "@shared": "dist/shared",
-    "@server": "dist/Server"
+    "@daos": "dist/src/daos",
+    "@entities": "dist/src/entities",
+    "@shared": "dist/src/shared",
+    "@server": "dist/src/Server"
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
