@@ -37,4 +37,4 @@ You can run the app either as a local server, Docker or with Kubernetes.
 * With a distributed system we can scale horizontally to meet traffic for a million users and also have a centralized caching system to quickly return frequently accessed like contents and reduce the load on the server.
 
 ### Online
-The application is deployed using the Google App Engine and is available at [https://bikelane-89992883.uc.r.appspot.com](https://bikelane-89992883.uc.r.appspot.com).
+The application is deployed using the Google App Engine and is available at [https://like-service-295414.uc.r.appspot.com](https://like-service-295414.uc.r.appspot.com).

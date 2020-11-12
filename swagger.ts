@@ -22,7 +22,7 @@ export default {
       description: 'Local server'
     },
     {
-      url: 'https://bikelane-89992883.uc.r.appspot.com/api',
+      url: 'https://like-service-295414.uc.r.appspot.com/api',
       description: 'Production server'
     }
   ],
