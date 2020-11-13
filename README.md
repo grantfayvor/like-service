@@ -6,6 +6,7 @@
 * Clone the repository on [Github](https://github.com/grantfayvor/like-service)
 * Change directory into the project folder
 * Run ```npm install``` to install dependencies
+* Rename the env file __./env/development.env.example__ to __./env/development.env__ (you can create an env file __production.env__ and __test.env__ as well for the different environments).
 
 ### __How to Run__
 You can run the app either as a local server, Docker or with Kubernetes.
